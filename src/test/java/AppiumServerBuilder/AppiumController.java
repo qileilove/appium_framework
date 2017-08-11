@@ -2,6 +2,7 @@ package AppiumServerBuilder;
 
 import Utility.Log;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import org.apache.commons.exec.CommandLine;
@@ -23,7 +24,7 @@ public class AppiumController {
     public static String executionOS = System.getProperty("platform");
 
     public static AppiumController instance = new AppiumController();
-    public AppiumDriver driver;
+    public AppiumDriver <MobileElement> driver ;
 
     public void startAppiumServer() {
 
@@ -71,14 +72,13 @@ public class AppiumController {
                 File appDir = new File(classpathRoot, "/app/Android");
                 File app = new File (appDir, "Contacts.apk");
                 DesiredCapabilities capabilities = new DesiredCapabilities();
-                capabilities.setCapability("avd", "Android7");
                 capabilities.setCapability("platformName", "Android");
-                capabilities.setCapability("deviceName", "Android7");
+                capabilities.setCapability("deviceName", "192.168.59.101:5555");
                 capabilities.setCapability("app", app.getAbsolutePath());
                 capabilities.setCapability("fullReset", false);
                 capabilities.setCapability("appPackage", "com.jayway.contacts");
                 capabilities.setCapability("appActivity", "com.jayway.contacts.MainActivity");
-                driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+                driver = new AppiumDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
                 break;
             case "IOS":
                 classpathRoot = new File(System.getProperty("user.dir"));
@@ -86,13 +86,14 @@ public class AppiumController {
                 app = new File(appDir, "ContactsSimulator.app");
                 capabilities = new DesiredCapabilities();
                 capabilities.setCapability("platformName", "ios");
-                capabilities.setCapability("deviceName", "iPhone 7");
-                capabilities.setCapability("platformVersion","10.2");
+                capabilities.setCapability("deviceName", "iPhone 6");
+                capabilities.setCapability("platformVersion","10.3");
                 capabilities.setCapability("AutomationName", "XCUITest");
                 capabilities.setCapability("app", app.getAbsolutePath());
-                driver = new IOSDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+                driver = new AppiumDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
                 break;
         }
+
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     }
 
