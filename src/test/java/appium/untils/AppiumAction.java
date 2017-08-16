@@ -8,13 +8,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 /**
  * Created by lqi on 11/08/2017.
  */
-public class BasePage   extends LocateElement{
+public class AppiumAction extends LocateElement{
 
     protected AppiumDriver driver;
     protected Wait wait;
     protected int TIMEOUT = 10;
 
-    public BasePage(AppiumDriver driver){
+    public AppiumAction(AppiumDriver driver){
         this.driver=driver;
     }
 
@@ -52,13 +52,24 @@ public class BasePage   extends LocateElement{
     }
 
 
+    /**
+     * @param locatorType
+     * @param locatorName
+     */
     public void waitElementToBeVisable(final String locatorType, final String locatorName) {
         wait = new WebDriverWait(driver,TIMEOUT);
         wait.until (ExpectedConditions.visibilityOf(getElement(driver, locatorType, locatorName)));
     }
 
 
+    /**
+     * @param driver
+     * @param locatorType
+     * @param locatorName
+     * @return
+     */
     public String getTextString(AppiumDriver driver,String locatorType, String locatorName){
+        waitElementToBeVisable(locatorType,locatorName);
         return getElement(driver,locatorType,locatorName).getText();
     }
 

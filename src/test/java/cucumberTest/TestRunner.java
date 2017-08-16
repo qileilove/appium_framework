@@ -6,6 +6,7 @@ package cucumberTest;
 
 import AppiumServerBuilder.AppiumController;
 import Utility.Log;
+import appium.untils.AndroidTools;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import org.apache.log4j.xml.DOMConfigurator;
@@ -23,19 +24,23 @@ import java.net.MalformedURLException;
         ,format = {"pretty","json:target/cucumber.json"}
 )
 
-public class TestRunner{
+public class TestRunner {
 
     @BeforeClass
     public static void launchAppiumServer() throws MalformedURLException {
 
-        DOMConfigurator.configure("log4j.xml");
-        Log.startTestCase();
+        DOMConfigurator.configure ( "log4j.xml" );
+        Log.startTestCase ();
+        AndroidTools.StartDevices ( "test" );
         AppiumController.instance.startAppiumServer();
     }
 
     @AfterClass
     public static void killAppiumServer() throws IOException {
-        Log.endTestCase("E-N-D");
+        Log.endTestCase ( "E-N-D" );
         AppiumController.instance.stopAppiumServer();
+        AndroidTools.stopDevices ("emulator-5554");
     }
 }
+
+
