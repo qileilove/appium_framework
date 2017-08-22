@@ -47,7 +47,7 @@ public class TestRunner {
     public  static void killAppiumServer() throws IOException, InterruptedException {
         Log.endTestCase ( "E-N-D" );
         if(executionOS.equalsIgnoreCase ( "ANDROID" )){
-            android.stopDevices ( "test" );
+            android.stopDevices ( "emulator-5554" );
         }
         else {
             ios.stopDevices( );

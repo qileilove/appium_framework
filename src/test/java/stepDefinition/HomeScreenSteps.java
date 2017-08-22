@@ -14,6 +14,7 @@ import org.junit.Assert;
 import PageObjects.*;
 import org.openqa.selenium.OutputType;
 
+import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 
 /**
@@ -50,7 +51,7 @@ public class HomeScreenSteps extends AppiumBaseClass{
     }
 
     @Given("^the app is running$")
-    public void theAppIsRunning() throws MalformedURLException {
+    public void theAppIsRunning() throws MalformedURLException, FileNotFoundException {
         AppiumController.instance.start();
         Log.info("The app is running");
     }

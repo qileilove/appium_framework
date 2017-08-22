@@ -1,6 +1,7 @@
 package AppiumServerBuilder;
 
 import Utility.Log;
+import config.readyml;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
@@ -11,6 +12,7 @@ import org.apache.commons.exec.DefaultExecutor;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -24,7 +26,11 @@ public class AppiumController {
     public static String executionOS = System.getProperty("platform");
 
     public static AppiumController instance = new AppiumController();
+
+    readyml redy= new readyml ();
+
     public AppiumDriver <MobileElement> driver ;
+
 
     public void startAppiumServer() {
 
@@ -62,33 +68,31 @@ public class AppiumController {
         }
     }
 
-    public void start() throws MalformedURLException {
+    public void start() throws MalformedURLException, FileNotFoundException {
         if (driver != null) {
             return;
         }
         switch(executionOS){
             case "ANDROID":
                 File classpathRoot = new File(System.getProperty("user.dir"));
-                File appDir = new File(classpathRoot, "/app/Android");
-                File app = new File (appDir, "Contacts.apk");
+                File app = new File (classpathRoot, redy.getConfigeElement("app_path"));
                 DesiredCapabilities capabilities = new DesiredCapabilities();
-                capabilities.setCapability("platformName", "Android");
+                capabilities.setCapability("platformName", redy.getConfigeElement("platformName"));
                 capabilities.setCapability("deviceName", "192.168.59.101:5555");
                 capabilities.setCapability("app", app.getAbsolutePath());
-                capabilities.setCapability("fullReset", false);
-                capabilities.setCapability("appPackage", "com.jayway.contacts");
-                capabilities.setCapability("appActivity", "com.jayway.contacts.MainActivity");
+                capabilities.setCapability("fullReset", redy.getConfigeElement("fullReset"));
+//                capabilities.setCapability("appPackage", "com.jayway.contacts");
+//                capabilities.setCapability("appActivity", "com.jayway.contacts.MainActivity");
                 driver = new AppiumDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
                 break;
             case "IOS":
                 classpathRoot = new File(System.getProperty("user.dir"));
-                appDir = new File(classpathRoot, "/app/iOS/");
-                app = new File(appDir, "ContactsSimulator.app");
+                app = new File(classpathRoot, redy.getConfigeElement("app_path"));
                 capabilities = new DesiredCapabilities();
-                capabilities.setCapability("platformName", "ios");
-                capabilities.setCapability("deviceName", "iPhone 6");
-                capabilities.setCapability("platformVersion","10.3");
-                capabilities.setCapability("AutomationName", "XCUITest");
+                capabilities.setCapability("platformName",redy.getConfigeElement("platformName"));
+                capabilities.setCapability("deviceName", redy.getConfigeElement("deviceName"));
+                capabilities.setCapability("platformVersion",redy.getConfigeElement("platformVersion"));
+                capabilities.setCapability("AutomationName", redy.getConfigeElement("platformVersion"));
                 capabilities.setCapability("app", app.getAbsolutePath());
                 driver = new AppiumDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
                 break;
@@ -101,6 +105,10 @@ public class AppiumController {
         if (driver != null) {
             driver.quit();
             driver = null;
-        }
+            switch(executionOS) {
+                case "ANDROID":
+
+            }
+            }
     }
 }

@@ -1,0 +1,12 @@
+android:
+  - 
+    app_path: "app/Android/Contacts.apk"
+    platformName: Android
+    fullReset: flase
+ios:
+  -
+    app_path: "/app/iOS/ContactsSimulator.app"
+    platformName: ios
+    deviceName: "iPhone 6"
+    platformVersion: "10.3"
+    AutomationName: "XCUITest"
