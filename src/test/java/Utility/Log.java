@@ -1,5 +1,6 @@
 package Utility;
 
+import appium.untils.AppiumAction;
 import org.apache.log4j.Logger;
 
 import java.text.SimpleDateFormat;
@@ -12,6 +13,10 @@ public class Log {
 
     // Initialize Log4j logs
     private static Logger Log = Logger.getLogger(Log.class.getName());
+
+    public Log(Class<? extends AppiumAction> aClass) {
+    }
+
     // This is to print log for the beginning of the test case, as we usually run so many test cases as a test suite
     public static void startTestCase(){
         String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
