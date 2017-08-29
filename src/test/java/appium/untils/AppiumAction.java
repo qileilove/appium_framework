@@ -2,7 +2,10 @@ package appium.untils;
 
 import Utility.Log;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileDriver;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -13,9 +16,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class AppiumAction extends LocateElement {
     public Log log = new Log ( this.getClass () );
 
-    protected AppiumDriver driver;
-    protected Wait wait;
-    protected int TIMEOUT = 10;
+    public AppiumDriver driver;
+    public Wait wait;
+    public int TIMEOUT = 10;
 
     public AppiumAction(AppiumDriver driver) {
         this.driver = driver;
@@ -88,13 +91,13 @@ public class AppiumAction extends LocateElement {
     }
 
 
-    public void dragAndDrop(int startx,int starty,int endx, int endy) {
+    public void dragAndDrop(int startx, int starty, int endx, int endy) {
 
         try {
             TouchAction touchAction = new TouchAction ( driver );
-            log.info ( "设备： " + driver + " " + " drag from ："+startx+":"+starty+"to"+endx+":"+endy );
+            log.info ( "设备： " + driver + " " + " drag from ：" + startx + ":" + starty + "to" + endx + ":" + endy );
 
-            touchAction.longPress(startx, starty).moveTo(endx, endy).release ().perform ();
+            touchAction.longPress ( startx, starty ).moveTo ( endx, endy ).release ().perform ();
         } catch (Exception e) {
             log.error ( "设备： " + driver + " " + "drag faliue！" );
             throw e;
@@ -144,4 +147,25 @@ public class AppiumAction extends LocateElement {
         return getElement ( driver, locatorType, locatorName ).getText ();
     }
 
+    /**
+     * 显式等待，程序休眠暂停
+     *
+     * @param time 以秒为单位
+     */
+    public void sleep(long time) {
+        try {
+            Thread.sleep ( time * 1000 );
+        } catch (InterruptedException e) {
+            e.printStackTrace ();
+        }
+    }
+
+    public void  unlock() {
+        if (((AndroidDriver) driver).isLocked())
+        ((AndroidDriver) driver).unlockDevice();
+    }
+    public void  lock() {
+        if (((AndroidDriver) driver).isLocked()==false)
+            ((AndroidDriver) driver).lockDevice();
+    }
 }

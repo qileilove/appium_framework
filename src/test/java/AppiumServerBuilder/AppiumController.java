@@ -80,10 +80,10 @@ public class AppiumController {
                 capabilities.setCapability("platformName", redy.getConfigeElement("platformName"));
                 capabilities.setCapability("deviceName", "192.168.59.101:5555");
                 capabilities.setCapability("app", app.getAbsolutePath());
-                capabilities.setCapability("fullReset", redy.getConfigeElement("fullReset"));
+                capabilities.setCapability("fullReset", Boolean.valueOf(redy.getConfigeElement("fullReset")));
 //                capabilities.setCapability("appPackage", "com.jayway.contacts");
 //                capabilities.setCapability("appActivity", "com.jayway.contacts.MainActivity");
-                driver = new AppiumDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+                driver = new AndroidDriver<MobileElement> (new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
                 break;
             case "IOS":
                 classpathRoot = new File(System.getProperty("user.dir"));
@@ -94,7 +94,7 @@ public class AppiumController {
                 capabilities.setCapability("platformVersion",redy.getConfigeElement("platformVersion"));
                 capabilities.setCapability("AutomationName", redy.getConfigeElement("platformVersion"));
                 capabilities.setCapability("app", app.getAbsolutePath());
-                driver = new AppiumDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+                driver = new IOSDriver<MobileElement> (new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
                 break;
         }
 
