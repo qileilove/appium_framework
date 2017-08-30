@@ -2,13 +2,17 @@ package appium.untils;
 
 import Utility.Log;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileCommand;
 import io.appium.java_client.MobileDriver;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
+import org.openqa.selenium.support.ui.Duration;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.io.File;
 
 /**
  * Created by lqi on 11/08/2017.
@@ -46,6 +50,17 @@ public class AppiumAction extends LocateElement {
     public void typeElement(String locatorType, String locatorName, String input) {
         waitElementToBeVisable ( locatorType, locatorName );
         getElement ( driver, locatorType, locatorName ).sendKeys ( input );
+    }
+    public void clearElement(String locatorType, String locatorName) {
+        waitElementToBeVisable ( locatorType, locatorName );
+        getElement ( driver, locatorType, locatorName ).clear();
+    }
+
+    public void upLoadFile(String locatorType, String locatorName, String filePath) {
+
+        waitElementToBeVisable ( locatorType, locatorName );
+
+        getElement ( driver, locatorType, locatorName ).sendKeys ( filePath );
     }
 
     /**
