@@ -7,6 +7,7 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidKeyCode;
 import io.appium.java_client.ios.IOSDriver;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -21,10 +22,17 @@ public class AppiumAction extends LocateElement {
     public Wait wait;
     public int TIMEOUT = 10;
 
+
+
     public AppiumAction(AppiumDriver driver) {
         this.driver = driver;
     }
 
+
+    public void excuteJs(String script) {
+
+        ((JavascriptExecutor) driver).executeScript(script);
+    }
 
     public String getText(String locatorType, String locatorName) {
         waitElementToBeVisable ( locatorType, locatorName );
