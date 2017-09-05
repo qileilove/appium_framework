@@ -1,16 +1,20 @@
 package appium.untils;
 
 import Utility.Log;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.TouchAction;
+import cucumber.api.java.cs.A;
+import io.appium.java_client.*;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidKeyCode;
 import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.awt.image.BufferedImage;
+import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * Created by lqi on 11/08/2017.
@@ -23,7 +27,6 @@ public class AppiumAction extends LocateElement {
     public int TIMEOUT = 10;
 
 
-
     public AppiumAction(AppiumDriver driver) {
         this.driver = driver;
     }
@@ -31,7 +34,7 @@ public class AppiumAction extends LocateElement {
 
     public void excuteJs(String script) {
 
-        ((JavascriptExecutor) driver).executeScript(script);
+        ((JavascriptExecutor) driver).executeScript ( script );
     }
 
     public String getText(String locatorType, String locatorName) {
@@ -39,16 +42,17 @@ public class AppiumAction extends LocateElement {
         return getElement ( driver, locatorType, locatorName ).getText ();
 
     }
+
     public void androidclickBackButton() {
         String selector = "searchString";
-        driver.findElement( MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(new UiSelector().text("+selector+"));"));
+        driver.findElement ( MobileBy.AndroidUIAutomator ( "new UiScrollable(new UiSelector()).scrollIntoView(new UiSelector().text(" + selector + "));" ) );
 
         ((AndroidDriver) driver).pressKeyCode ( AndroidKeyCode.BACK );
     }
 
-    public void androidScollToText( String scollToText) {
+    public void androidScollToText(String scollToText) {
 
-        getElement ( driver, "ByAndroidUIAutomator", "new UiScrollable(new UiSelector()).scrollIntoView(new UiSelector().text("+scollToText+"));" );
+        getElement ( driver, "ByAndroidUIAutomator", "new UiScrollable(new UiSelector()).scrollIntoView(new UiSelector().text(" + scollToText + "));" );
 
     }
 
@@ -57,6 +61,19 @@ public class AppiumAction extends LocateElement {
         return getElement ( driver, locatorType, locatorName ).isSelected ();
 
     }
+
+
+    public WebElement getElementFromList(String locatorType, String locatorName, String text) {
+        waitElementToBeVisable ( locatorType, locatorName );
+        List<WebElement> elementList = (List<WebElement>) getElement ( driver, locatorType, locatorName );
+        for (int i = 0; i <= elementList.size (); i++)
+            if (elementList.get ( i ).getText ().contains ( text )) {
+                return elementList.get ( i );
+            }
+
+        return null;
+    }
+
     /**
      * click an element
      *
