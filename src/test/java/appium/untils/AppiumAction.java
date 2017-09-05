@@ -30,6 +30,67 @@ public class AppiumAction extends LocateElement {
     public AppiumAction(AppiumDriver driver) {
         this.driver = driver;
     }
+    public void androidPressesKeyCode(String keyName) {
+        switch (keyName) {
+            case "BACK":
+
+                ((AndroidDriver) driver).pressKeyCode ( AndroidKeyCode.BACK );
+                break;
+            case "FLAG_VIRTUAL_HARD_KEY":
+
+                ((AndroidDriver) driver).pressKeyCode ( AndroidKeyCode.FLAG_VIRTUAL_HARD_KEY );
+                break;
+            case "ACTION_DOWN":
+
+                ((AndroidDriver) driver).pressKeyCode ( AndroidKeyCode.ACTION_DOWN );
+                break;
+            case "ACTION_MULTIPLE":
+
+                ((AndroidDriver) driver).pressKeyCode ( AndroidKeyCode.ACTION_MULTIPLE );
+                break;
+            case "ACTION_UP":
+
+                ((AndroidDriver) driver).pressKeyCode ( AndroidKeyCode.ACTION_UP );
+                break;
+            case "BACKSPACE":
+
+                ((AndroidDriver) driver).pressKeyCode ( AndroidKeyCode.BACKSPACE );
+                break;
+            case "DEL":
+
+                ((AndroidDriver) driver).pressKeyCode ( AndroidKeyCode.DEL );
+                break;
+            case "FLAG_CANCELED":
+
+                ((AndroidDriver) driver).pressKeyCode ( AndroidKeyCode.FLAG_CANCELED );
+                break;
+            case "FLAG_CANCELED_LONG_PRESS":
+
+                ((AndroidDriver) driver).pressKeyCode ( AndroidKeyCode.FLAG_CANCELED_LONG_PRESS );
+                break;
+            case "FLAG_EDITOR_ACTION":
+
+                ((AndroidDriver) driver).pressKeyCode ( AndroidKeyCode.FLAG_EDITOR_ACTION );
+                break;
+            case "FLAG_FALLBACK":
+
+                ((AndroidDriver) driver).pressKeyCode ( AndroidKeyCode.FLAG_FALLBACK );
+                break;
+            case "FLAG_FROM_SYSTEM":
+
+                ((AndroidDriver) driver).pressKeyCode ( AndroidKeyCode.FLAG_FROM_SYSTEM );
+                break;
+            case "FLAG_LONG_PRESS":
+
+                ((AndroidDriver) driver).pressKeyCode ( AndroidKeyCode.FLAG_LONG_PRESS );
+                break;
+            case "HOME":
+
+                ((AndroidDriver) driver).pressKeyCode ( AndroidKeyCode.HOME );
+                break;
+        }
+
+    }
 
 
     public void excuteJs(String script) {
