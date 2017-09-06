@@ -1,5 +1,6 @@
 package appium.untils;
 
+import AppiumServerBuilder.AppiumBaseClass;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
@@ -9,7 +10,7 @@ import org.openqa.selenium.By;
 /**
  * Created by lqi on 10/08/2017.
  */
-public class LocateElement {
+public class LocateElement extends AppiumBaseClass{
 
 public MobileElement getElement(AppiumDriver<MobileElement> driver, String locator, String localpath){
     MobileElement MobileElement = null;

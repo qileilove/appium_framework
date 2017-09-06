@@ -3,6 +3,7 @@ package stepDefinition;
 import AppiumServerBuilder.AppiumBaseClass;
 import AppiumServerBuilder.AppiumController;
 import Utility.Log;
+import appium.untils.GetScreenShot;
 import cucumber.api.Scenario;
 import io.appium.java_client.MobileElement;
 import cucumber.api.java.en.Given;
@@ -10,12 +11,18 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
+import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
 import PageObjects.*;
 import org.openqa.selenium.OutputType;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by dwanniarachchi on 8/2/17.
@@ -42,6 +49,8 @@ public class HomeScreenSteps extends AppiumBaseClass{
                 byte[] screenshot = driver()
                         .getScreenshotAs(OutputType.BYTES);
                 scenario.embed(screenshot, "image/png");
+                GetScreenShot getScreenShot= new GetScreenShot ();
+                getScreenShot.getScreenShot ();
             } catch (Exception e) {
                 e.printStackTrace();
                 //Utility.Log.error("Error occurred. ScreenShot Captured." + e.getMessage().toString());

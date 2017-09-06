@@ -142,6 +142,8 @@
                             <projectName>AppiumCrossPlatformIosAndroid</projectName>
                             <outputDirectory>${project.build.directory}/site/cucumber-reports</outputDirectory>
                             <cucumberOutput>${project.build.directory}/cucumber.json</cucumberOutput>
+                            <enableFlashCharts>true</enableFlashCharts>
+
                         </configuration>
                     </execution>
                 </executions>
