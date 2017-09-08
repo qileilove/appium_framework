@@ -1,8 +1,10 @@
 package Utility;
 
 import appium.untils.AppiumAction;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -38,6 +40,16 @@ public class Log {
         Log.info("****************************************************************************************");
         Log.info("Scenario : " + scenarioName );
         Log.info("****************************************************************************************");
+    }
+    public static Logger log;
+
+    public static void configure(){
+
+//      set log4j properties
+        String usrDir = new File (System.getProperty("user.dir")).getAbsolutePath();
+        System.setProperty("my.log", usrDir + "/target/");
+        log= Logger.getLogger(Log.class);
+        log.setLevel( Level.ALL);
     }
 
 

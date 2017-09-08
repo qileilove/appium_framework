@@ -62,7 +62,8 @@ public class HomeScreenSteps extends AppiumBaseClass{
     @Given("^the app is running$")
     public void theAppIsRunning() throws MalformedURLException, FileNotFoundException {
         AppiumController.instance.start();
-        Log.info("The app is running");
+        Log.log.info ( "APPIUM start "
+        );
     }
 
     @Given("^I am on the home screen$")
