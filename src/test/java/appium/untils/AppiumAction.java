@@ -1,20 +1,17 @@
 package appium.untils;
 
 import Utility.Log;
-import cucumber.api.java.cs.A;
 import io.appium.java_client.*;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidKeyCode;
-import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.awt.image.BufferedImage;
 import java.util.List;
-import java.util.function.Supplier;
+import java.util.Set;
 
 /**
  * Created by lqi on 11/08/2017.
@@ -86,6 +83,17 @@ public class AppiumAction extends LocateElement {
                 break;
         }
 
+    }
+    private void getConetextHandles(String handleName){
+
+        Set<String> contextNames = driver().getContextHandles();
+        for(String context:contextNames) {
+
+
+            if (context.contains ( "WEBVIEW_" )) {
+                driver ().context ( context );
+            }
+        }
     }
 
 
