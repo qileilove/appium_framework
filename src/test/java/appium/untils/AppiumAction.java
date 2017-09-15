@@ -4,12 +4,15 @@ import Utility.Log;
 import io.appium.java_client.*;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidKeyCode;
+import io.appium.java_client.android.Connection;
+import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Set;
 
@@ -21,6 +24,11 @@ public class AppiumAction extends LocateElement {
 
     public Wait wait;
     public int TIMEOUT = 10;
+
+
+    public void hidekeyboard(){
+        driver ().hideKeyboard ();
+    }
 
 
     public void androidPressesKeyCode(String keyName) {
@@ -196,6 +204,26 @@ public class AppiumAction extends LocateElement {
         // wait for page loading
     }
 
+    public void setConnect(String connectionType){
+        switch (connectionType) {
+            case "WIFI":
+        ((AndroidDriver) driver()).setConnection ( Connection.WIFI );
+        break;
+            case "AIRPLANE":
+                ((AndroidDriver) driver()).setConnection ( Connection.AIRPLANE );
+                break;
+            case "DATA":
+                ((AndroidDriver) driver()).setConnection ( Connection.DATA );
+                break;
+            case "ALL":
+                ((AndroidDriver) driver()).setConnection ( Connection.ALL );
+                break;
+            case "NONE":
+                ((AndroidDriver) driver()).setConnection ( Connection.NONE );
+                break;
+
+        }
+    }
     /**
      * This Method for swipe Left
      */
@@ -293,13 +321,18 @@ public class AppiumAction extends LocateElement {
         }
     }
 
-    public void unlock() {
+    public void unlockAndroid() {
         if (((AndroidDriver) driver()).isLocked ())
             ((AndroidDriver) driver()).unlockDevice ();
     }
 
-    public void lock() {
+    public void lockAndroid() {
         if (((AndroidDriver) driver()).isLocked () == false)
             ((AndroidDriver) driver()).lockDevice ();
     }
+
+    public void lockIos(Duration duration){
+        ((IOSDriver) driver ()).lockDevice ( duration );
+    }
+
 }
