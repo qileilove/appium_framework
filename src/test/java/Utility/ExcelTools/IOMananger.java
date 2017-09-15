@@ -1,5 +1,16 @@
 package Utility.ExcelTools;
 
+import Report.TestListener;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -50,7 +61,7 @@ public class IOMananger {
 
         public static Object[][] readExcelDataXlsx(String sheetName,String path) throws IOException {
             InputStream is = new FileInputStream (path);
-            XSSFWorkbook workbook = new XSSFWorkbook(is);//读取Excel
+            XSSFWorkbook workbook = new XSSFWorkbook (is);//读取Excel
             XSSFSheet sheet = workbook.getSheet(sheetName);//读取sheet
             if(sheet!=null){
                 int lastrowNum = sheet.getLastRowNum()+1;//获取总行数
@@ -60,7 +71,7 @@ public class IOMananger {
                     XSSFRow row = sheet.getRow(rowNum);
                     for(int j=0;j<collNum;j++){
                         if(row.getCell(j)!=null){
-                            row.getCell(j).setCellType(CellType.STRING);
+                            row.getCell(j).setCellType( CellType.STRING);
                             user[rowNum][j] = row.getCell(j).getStringCellValue();
                         }
                     }
@@ -75,7 +86,7 @@ public class IOMananger {
         }
         public static Object[][] readExcelDataXls(String sheetName,String path) throws IOException {
             InputStream is = new FileInputStream(path);
-            HSSFWorkbook workbook = new HSSFWorkbook(is);//读取Excel
+            HSSFWorkbook workbook = new HSSFWorkbook (is);//读取Excel
             HSSFSheet sheet = workbook.getSheet(sheetName);//读取sheet
             if(sheet!=null){
                 int lastrowNum = sheet.getLastRowNum()+1;//获取总行数

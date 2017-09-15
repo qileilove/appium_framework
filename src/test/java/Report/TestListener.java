@@ -2,6 +2,7 @@ package Report;
 
 import Utility.ExcelTools.IOMananger;
 import Utility.Log;
+import appium.untils.AppiumComm;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 
 import java.io.File;

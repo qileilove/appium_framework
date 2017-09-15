@@ -198,6 +198,6 @@ public class AppiumComm {
         }
         return result;
     }
-    
+
 
 }
