@@ -36,7 +36,7 @@ public class HomeScreenSteps extends AppiumBaseClass{
     @Before
     public void setUp(Scenario scenario) throws Exception {
         AppiumController.instance.start();
-        Log.scenarioName(scenario.getName());
+        Log.info (scenario.getName());
         searchPage = new ContactSearchPageAndroid_IOS(driver());
         detailPage = new ContactDetailPageAndroid_IOS(driver());
     }
@@ -62,8 +62,7 @@ public class HomeScreenSteps extends AppiumBaseClass{
     @Given("^the app is running$")
     public void theAppIsRunning() throws MalformedURLException, FileNotFoundException {
         AppiumController.instance.start();
-        Log.log.info ( "APPIUM start "
-        );
+        Log.info ( "APPIUM start " );
     }
 
     @Given("^I am on the home screen$")

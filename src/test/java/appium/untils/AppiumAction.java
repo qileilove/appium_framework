@@ -298,7 +298,6 @@ public class AppiumAction extends LocateElement {
 
 
     /**
-     * @param driver
      * @param locatorType
      * @param locatorName
      * @return
