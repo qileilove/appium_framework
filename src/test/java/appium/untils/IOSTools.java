@@ -12,12 +12,11 @@ public class IOSTools implements DevicesTools {
 
     @Override
     public void StartDevices(String device) {
-        return ;
+
     }
 
     @Override
     public void stopDevices(String device) {
-        return;
 
     }
 
