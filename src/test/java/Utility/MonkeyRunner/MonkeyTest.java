@@ -1,12 +1,7 @@
 package Utility.MonkeyRunner;
 
 import com.android.chimpchat.adb.AdbBackend;
-import com.android.chimpchat.adb.AdbChimpDevice;
-
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
+import com.android.chimpchat.core.IChimpDevice;
 
 /**
  * Created by lqi on 20/09/2017.
@@ -14,28 +9,17 @@ import java.util.HashMap;
 
 
 public class MonkeyTest {
-    private static AdbChimpDevice device;
-    private static AdbBackend adb;
-
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
+        // sdk/platform-tools has to be in PATH env variable in order to find adb
+        IChimpDevice device = new AdbBackend().waitForConnection();
 
-        if (adb==null){
-            adb = new AdbBackend();
-//      参数分别为自己定义的等待连接时间和设备id
-            //这里需要注意一下adb的类型
-            device = (AdbChimpDevice) adb.waitForConnection(8000,"MSM8225QRD5");
-        }
-        //添加启动权限
-        String action = "android.intent.action.MAIN";
-        Collection<String> categories = new ArrayList<String> ();
-        categories.add("android.intent.category.LAUNCHER");
-        //              启动要测试的主界面
-        device.startActivity(null, action, null, null, categories,
-                new HashMap<String, Object> (),"cn.com.fetion/.android.ui.activities.StartActivity", 0);
-        //           点击某一个坐标
-        //touch方法略有变化
-        device.touch(202,258,com.android.chimpchat.core.TouchPressType.DOWN_AND_UP);
+        // Print Device Name
+        System.out.println(device.getProperty("build.model"));
+
+        // Take a snapshot and save to out.png
+        device.takeSnapshot().writeToFile("out.png", null);
+
+        device.dispose();
     }
 }
 

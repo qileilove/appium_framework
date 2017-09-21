@@ -35,7 +35,7 @@ public class TestRunner {
     public static void launchAppiumServer() throws MalformedURLException {
 
         DOMConfigurator.configure ( "log4j.xml" );
-        Log.startTestCase ();
+        Log.info ("lanch appium");
         if(executionOS.equalsIgnoreCase ( "ANDROID" )){
             android.StartDevices ( "test" );
         }
@@ -45,7 +45,7 @@ public class TestRunner {
 
     @AfterClass
     public  static void killAppiumServer() throws IOException, InterruptedException {
-        Log.endTestCase ( "E-N-D" );
+        Log.info ( "E-N-D" );
         if(executionOS.equalsIgnoreCase ( "ANDROID" )){
             android.stopDevices ( "emulator-5554" );
         }
